@@ -1,15 +1,17 @@
-"use strict"
+/* eslint-disable import/no-extraneous-dependencies */
+
+
 const path = require("path")
-const utils = require("./utils")
 const webpack = require("webpack")
-const config = require("../config")
 const merge = require("webpack-merge")
-const baseWebpackConfig = require("./webpack.base.conf")
 const CopyWebpackPlugin = require("copy-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const OptimizeCSSPlugin = require("optimize-css-assets-webpack-plugin")
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
+const baseWebpackConfig = require("./webpack.base.conf")
+const config = require("../config")
+const utils = require("./utils")
 
 const env =
     process.env.NODE_ENV === "testing"
@@ -127,7 +129,7 @@ if (config.build.productionGzip) {
         new CompressionWebpackPlugin({
             asset: "[path].gz[query]",
             algorithm: "gzip",
-            test: new RegExp("\\.(" + config.build.productionGzipExtensions.join("|") + ")$"),
+            test: new RegExp(`\\.(${  config.build.productionGzipExtensions.join("|")  })$`),
             threshold: 10240,
             minRatio: 0.8
         })
@@ -135,7 +137,7 @@ if (config.build.productionGzip) {
 }
 
 if (config.build.bundleAnalyzerReport) {
-    const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin
+    const {BundleAnalyzerPlugin} = require("webpack-bundle-analyzer")
     webpackConfig.plugins.push(new BundleAnalyzerPlugin())
 }
 

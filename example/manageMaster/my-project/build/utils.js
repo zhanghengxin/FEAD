@@ -1,7 +1,11 @@
-"use strict"
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable guard-for-in */
+/* eslint-disable no-param-reassign */
+/* eslint-disable func-names */
+/* eslint-disable import/no-extraneous-dependencies */
 const path = require("path")
-const config = require("../config")
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const config = require("../config")
 const packageConfig = require("../package.json")
 
 exports.assetsPath = function(_path) {
@@ -36,7 +40,7 @@ exports.cssLoaders = function(options) {
 
         if (loader) {
             loaders.push({
-                loader: loader + "-loader",
+                loader: `${loader}-loader`,
                 options: Object.assign({}, loaderOptions, {
                     sourceMap: options.sourceMap
                 })
@@ -50,9 +54,8 @@ exports.cssLoaders = function(options) {
                 use: loaders,
                 fallback: "vue-style-loader"
             })
-        } else {
-            return ["vue-style-loader"].concat(loaders)
         }
+        return ["vue-style-loader"].concat(loaders)
     }
 
     // https://vue-loader.vuejs.org/en/configurations/extract-css.html
@@ -75,7 +78,7 @@ exports.styleLoaders = function(options) {
     for (const extension in loaders) {
         const loader = loaders[extension]
         output.push({
-            test: new RegExp("\\." + extension + "$"),
+            test: new RegExp(`\\.${extension}$`),
             use: loader
         })
     }
@@ -94,7 +97,7 @@ exports.createNotifierCallback = () => {
 
         notifier.notify({
             title: packageConfig.name,
-            message: severity + ": " + error.name,
+            message: `${severity}: ${error.name}`,
             subtitle: filename || "",
             icon: path.join(__dirname, "logo.png")
         })

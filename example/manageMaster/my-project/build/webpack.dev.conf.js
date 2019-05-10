@@ -1,16 +1,19 @@
-"use strict"
-const utils = require("./utils")
+/* eslint-disable import/no-extraneous-dependencies */
+
+
 const webpack = require("webpack")
-const config = require("../config")
 const merge = require("webpack-merge")
 const path = require("path")
-const baseWebpackConfig = require("./webpack.base.conf")
 const CopyWebpackPlugin = require("copy-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const FriendlyErrorsPlugin = require("friendly-errors-webpack-plugin")
 const portfinder = require("portfinder")
+const baseWebpackConfig = require("./webpack.base.conf")
+const config = require("../config")
+const utils = require("./utils")
+const faker = require('../mock/faker.js')
 
-const HOST = process.env.HOST
+const {HOST} = process.env
 const PORT = process.env.PORT && Number(process.env.PORT)
 
 const devWebpackConfig = merge(baseWebpackConfig, {
@@ -40,6 +43,12 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         quiet: true, // necessary for FriendlyErrorsPlugin
         watchOptions: {
             poll: config.dev.poll
+        },
+        // 添加mock中间件
+        before(app){
+            // 请求线程， 代理列表
+            faker(app, config.dev.proxyTable)
+            // debugger
         }
     },
     plugins: [

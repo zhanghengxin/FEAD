@@ -1,4 +1,5 @@
-"use strict"
+
+
 // Template version: 1.3.1
 // see http://vuejs-templates.github.io/webpack for documentation.
 
@@ -9,7 +10,24 @@ module.exports = {
         // Paths
         assetsSubDirectory: "static",
         assetsPublicPath: "/",
-        proxyTable: {},
+        proxyTable: {
+            // '/login': {
+            //     target: '0.0.0.0',
+            //     changeOrigin: true,
+            //     useMock: true,
+            //     pathRewrite: {
+            //         '^/login': '/'
+            //     }
+            // },
+            // '/exit': {
+            //     target: '0.0.0.0',
+            //     changeOrigin: true,
+            //     useMock: true,
+            //     // pathRewrite: {
+            //     //     '^/exit': '/'
+            //     // }
+            // },
+        },
 
         // Various Dev Server settings
         host: "localhost", // can be overwritten by process.env.HOST
