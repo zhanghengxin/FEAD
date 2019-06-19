@@ -18,7 +18,9 @@ module.exports = {
         // https://github.com/standard/standard/blob/master/docs/RULES-en.md
         "standard",
         "plugin:vue/recommended",
-        "plugin:prettier/recommended"
+        "plugin:prettier/recommended",
+        // "plugin:prettier/recommended",
+        // "prettier/standard"
     ],
     // required to lint *.vue files
     plugins: ["vue"],
